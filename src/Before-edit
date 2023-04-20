@@ -1,25 +1,17 @@
 import { Box, Card, Container, Button,Modal} from "@mantine/core";
 import { useEffect, useState } from "react";
 import TransactionForm from "../components/TransactionForm";
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { collection, getDoc, getDocs, query } from 'firebase/firestore';
 import { fireDb } from '../FirebaseConfig';
 import { useDispatch } from 'react-redux';
 import { ShowLoading, HideLoading} from '../redux/alertsSlice';
+import { showNotification } from "@mantine/notifications";
 import TransactionTable from "../components/TransactionTable";
-import Filters from "../components/Filters";
-import moment from "moment";
 const Home = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // Filters
-  const [filters, setFilters] = useState({
-    type: "",
-    frequency: "7",
-  });
-
   // 1st state
-
   const [showForm, setShowForm] = useState(false);
   const [formMode, setFormMode] = useState("add");
 
@@ -30,56 +22,14 @@ const Home = () => {
 
   const [selectedTransaction, setSelectedTransaction] = useState({});
 
-
   const dispatch = useDispatch();
-
-  const getWhereConditions = () => {
-    const tempConditions = [];
-
-    // Type condition
-    if(filters.type !== ""){
-      tempConditions.push(
-        where("type", "==", filters.type)
-      )
-    }
-
-    // Frequency condition
-
-    if(filters.frequency === "7"){
-      tempConditions.push(
-        where("date", ">=", moment().subtract(7, "days").format("YYYY-MM-DD"))
-      )
-    }
-
-    if(filters.frequency === "30"){
-      tempConditions.push(
-        where("date", ">=", moment().subtract(30, "days").format("YYYY-MM-DD"))
-      )
-    }
-
-    if(filters.frequency === "365"){
-      tempConditions.push(
-        where("date", ">=", moment().subtract(365, "days").format("YYYY-MM-DD"))
-      )
-    }
-
-    return tempConditions;
-   
-  }
 
   const getData = async () => {
 
     try{
-
-
-      const whereConditions = getWhereConditions();
-
       dispatch(ShowLoading());
 
-      const qry = query(collection(fireDb, `users/${user.id}/transactions`),
-      orderBy("date", "desc"),
-      ...whereConditions);
-
+      const qry = query(collection(fireDb, `users/${user.id}/transactions`));
       const response = await getDocs(qry)
       
       const data = response.docs.map((doc) => ({
@@ -99,13 +49,10 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {
-    getData();
-  },[])
 
   useEffect(() => {
     getData();
-  },[filters])
+  },[])
     
   return (
     <Container size={"lg"}>
@@ -120,10 +67,7 @@ const Home = () => {
 
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                <div>
-                   <Filters
-                   filters={filters}
-                   setFilters={setFilters}
-                   getData={getData}/>
+                   Filter
                </div>
                <div>
                    <Button color="indigo" 
@@ -136,17 +80,16 @@ const Home = () => {
                    </Button>
                </div>
           </div>
-
-          {/* last Show Data after get */}
           <TransactionTable 
-          getData={getData}
           transactions={transactions} 
           setSelectedTransaction={setSelectedTransaction}
           setFormMode={setFormMode}
-          setShowForm={setShowForm}
-          />
+          setShowForm={setShowForm}/>
         </Card>
 
+        {/* last Show Data after get */}
+      
+        
       </Box>
     
 
@@ -161,9 +104,7 @@ const Home = () => {
         formMode={formMode}
         setFormMode={setFormMode}
         setShowForm={setShowForm}
-        showForm={showForm}
-        transactionData={selectedTransaction}
-        getData={getData}/>
+        showForm={showForm}/>
       </Modal>
     </Container>
   )
