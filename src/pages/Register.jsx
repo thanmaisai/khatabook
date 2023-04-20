@@ -85,7 +85,7 @@ const Register = () => {
   }
 
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center" , height:"80vh"}}>
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center" , height:"100vh"}}>
          <Card
          shadow={'lg'}
          mt={"lg"}
@@ -123,7 +123,7 @@ const Register = () => {
 
                 <Button fullWidth type='submit' mb={20}>Submit</Button>
 
-                <Link to="/login" style={{color:"grey", textDecoration:"none"}}>Already have an account Login</Link>
+                <Link to="/login" style={{color:"grey", textDecoration:"none"}}>Already have an account! Login</Link>
             </form>
         </Card>
     </div>

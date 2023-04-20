@@ -15,11 +15,12 @@ import Spinner from "./components/Spinner";
 const App = () => {
 
   const {loading} = useSelector(state => state.alerts);
-  
-  
-  
   return (
     <>
+    <div style={{
+      //background color
+        backgroundColor: '#FFD3B0',
+      }}>
       {loading && (
         <div className="spinner">
            <Spinner/>
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}></Route>
         </Routes>
       </BrowserRouter>
+      </div>
     </>
   )
 }

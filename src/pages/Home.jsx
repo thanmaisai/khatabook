@@ -112,11 +112,12 @@ const Home = () => {
       <Box>
         <Card 
         sx={{
-          height:"80vh"
+          height:"100vh"
         }}
         shadow={"md"}
         withBorder
-        mt={50}>
+        mt={50}
+        style={{backgroundColor:'#FFF9DE'}}>
 
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                <div>
@@ -126,7 +127,7 @@ const Home = () => {
                    getData={getData}/>
                </div>
                <div>
-                   <Button color="indigo" 
+                   <Button color="red" 
                    onClick={() => {
                     setShowForm(true);
                     setFormMode("add");

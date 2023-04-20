@@ -87,7 +87,7 @@ const Login = () => {
   }
 
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center" , height:"80vh"}}>
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center" , height:"100vh"}}>
          <Card
          shadow={'lg'}
          mt={"lg"}
@@ -118,7 +118,7 @@ const Login = () => {
 
                 <Button fullWidth type='submit' mb={20}>Submit</Button>
 
-                <Link to="/register" style={{color:"grey", textDecoration:"none"}}>Don't have an account? Login</Link>
+                <Link to="/register" style={{color:"grey", textDecoration:"none",}}>Don't have an account? Register Here</Link>
             </form>
         </Card>
     </div>
