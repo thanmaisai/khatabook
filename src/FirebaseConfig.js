@@ -3,12 +3,16 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
-  authDomain: "mymoney-bde29.firebaseapp.com",
-  projectId: "mymoney-bde29",
-  storageBucket: "mymoney-bde29.appspot.com",
-  messagingSenderId: "701676053837",
-  appId: "1:701676053837:web:97d0f796e1fb50c4fec304",
-  measurementId: "G-6VF34CK911"
+  authDomain: "khathabook-42ea0.firebaseapp.com",
+
+  projectId: "khathabook-42ea0",
+
+  storageBucket: "khathabook-42ea0.appspot.com",
+
+  messagingSenderId: "392820920674",
+
+  appId: "1:392820920674:web:047fab4cda76a2a8e29c3b"
+
 };
 
 // Initialize Firebase
